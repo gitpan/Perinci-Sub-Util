@@ -1,0 +1,9 @@
+Revision history for Perinci-Sub-Util
+
+0.38     2014-06-27 (SHARYANTO)
+
+         - First release. Split from Perinci-Util dist.
+
+         - Add function: gen_modified_sub().
+
+
