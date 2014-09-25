@@ -1,5 +1,10 @@
 Revision history for Perinci-Sub-Util
 
+0.39     2014-09-25 (PERLANCAR)
+
+         - Add functions: warn_err() and die_err().
+
+
 0.38     2014-06-27 (SHARYANTO)
 
          - First release. Split from Perinci-Util dist.

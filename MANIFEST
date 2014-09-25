@@ -8,6 +8,7 @@ Makefile.PL
 README
 dist.ini
 lib/Perinci/Sub/Util.pm
+lib/Perinci/Sub/Util/ResObj.pm
 t/00-compile.t
 t/caller.t
 t/err.t

@@ -1,5 +1,8 @@
 package Perinci::Sub::Util;
 
+our $DATE = '2014-09-25'; # DATE
+our $VERSION = '0.39'; # VERSION
+
 use 5.010001;
 use strict;
 use warnings;
@@ -10,10 +13,9 @@ our @EXPORT_OK = qw(
                        err
                        caller
                        gen_modified_sub
+                       warn_err
+                       die_err
                );
-
-our $DATE = '2014-06-27'; # DATE
-our $VERSION = '0.38'; # VERSION
 
 our %SPEC;
 
@@ -325,6 +327,25 @@ sub gen_modified_sub {
     [200, "OK", {code=>$output_code, meta=>$output_meta}];
 }
 
+# TODO: for simpler cases (e.g. only remove some arguments, or preset some
+# arguments), create more convenient helper, e.g.
+#
+# gen_curried_sub('list_users', {is_suspended=>1}, ?'list_suspended_users'); # equivalent to remove args => ['is_suspended'] and create a wrapper that calls list_users with is_suspended=>1
+
+sub warn_err {
+    require Carp;
+
+    my $res = err(@_);
+    Carp::carp("ERROR $res->[0]: $res->[1]");
+}
+
+sub die_err {
+    require Carp;
+
+    my $res = err(@_);
+    Carp::croak("ERROR $res->[0]: $res->[1]");
+}
+
 1;
 # ABSTRACT: Helper when writing functions
 
@@ -340,7 +361,7 @@ Perinci::Sub::Util - Helper when writing functions
 
 =head1 VERSION
 
-This document describes version 0.38 of Perinci::Sub::Util (from Perl distribution Perinci-Sub-Util), released on 2014-06-27.
+This document describes version 0.39 of Perinci::Sub::Util (from Perl distribution Perinci-Sub-Util), released on 2014-09-25.
 
 =head1 SYNOPSIS
 
@@ -360,7 +381,33 @@ Example for err() and caller():
      [200, "OK"];
  }
 
-Example for gen_modified_sub()
+Example for gen_modified_sub():
+
+ use Perinci::Sub::Util qw(gen_modified_sub);
+
+ $SPEC{list_users} = {
+     v => 1.1,
+     args => {
+         search => {},
+         is_suspended => {},
+     },
+ };
+ sub list_users { ... }
+
+ gen_modified_sub(
+     output_name => 'list_suspended_users',
+     base_name   => 'list_users',
+     remove_args => ['is_suspended'],
+     output_code => sub {
+         list_users(@_, is_suspended=>1);
+     },
+ );
+
+Example for die_err() and warn_err():
+
+ use Perinci::Sub::Util qw(warn_err die_err);
+ warn_err(403, "Forbidden");
+ die_err(403, "Forbidden");
 
 =head1 FUNCTIONS
 
@@ -391,6 +438,20 @@ Examples:
                            #     {logs=>[...], prev=>[404, "Prev error"]}]
 
 Will put C<stack_trace> in logs only if C<Carp::Always> module is loaded.
+
+=head2 warn_err(...)
+
+This is a shortcut for:
+
+ $res = err(...);
+ warn "ERROR $res->[0]: $res->[1]";
+
+=head2 die_err(...)
+
+This is a shortcut for:
+
+ $res = err(...);
+ die "ERROR $res->[0]: $res->[1]";
 
 
 =head2 gen_modified_sub(%args) -> [status, msg, result, meta]
@@ -496,6 +557,8 @@ First element (status) is an integer containing HTTP status code
 element (meta) is called result metadata and is optional, a hash
 that contains extra information.
 
+ (hash)
+
 =head1 FAQ
 
 =head2 What if I want to put result ($res->[2]) into my result with err()?
@@ -522,7 +585,7 @@ Please visit the project's homepage at L<https://metacpan.org/release/Perinci-Su
 
 =head1 SOURCE
 
-Source repository is at L<https://github.com/sharyanto/perl-Perinci-Sub-Util>.
+Source repository is at L<https://github.com/perlancar/perl-Perinci-Sub-Util>.
 
 =head1 BUGS
 
@@ -534,11 +597,11 @@ feature.
 
 =head1 AUTHOR
 
-Steven Haryanto <stevenharyanto@gmail.com>
+perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Steven Haryanto.
+This software is copyright (c) 2014 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
