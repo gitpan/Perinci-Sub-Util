@@ -1,7 +1,7 @@
 package Perinci::Sub::Util;
 
-our $DATE = '2014-09-25'; # DATE
-our $VERSION = '0.39'; # VERSION
+our $DATE = '2014-10-15'; # DATE
+our $VERSION = '0.40'; # VERSION
 
 use 5.010001;
 use strict;
@@ -361,7 +361,7 @@ Perinci::Sub::Util - Helper when writing functions
 
 =head1 VERSION
 
-This document describes version 0.39 of Perinci::Sub::Util (from Perl distribution Perinci-Sub-Util), released on 2014-09-25.
+This document describes version 0.40 of Perinci::Sub::Util (from Perl distribution Perinci-Sub-Util), released on 2014-10-15.
 
 =head1 SYNOPSIS
 
@@ -585,7 +585,7 @@ Please visit the project's homepage at L<https://metacpan.org/release/Perinci-Su
 
 =head1 SOURCE
 
-Source repository is at L<https://github.com/perlancar/perl-Perinci-Sub-Util>.
+Source repository is at L<https://github.com/sharyanto/perl-Perinci-Sub-Util>.
 
 =head1 BUGS
 

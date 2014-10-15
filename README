@@ -2,8 +2,8 @@ NAME
     Perinci::Sub::Util - Helper when writing functions
 
 VERSION
-    This document describes version 0.39 of Perinci::Sub::Util (from Perl
-    distribution Perinci-Sub-Util), released on 2014-09-25.
+    This document describes version 0.40 of Perinci::Sub::Util (from Perl
+    distribution Perinci-Sub-Util), released on 2014-10-15.
 
 SYNOPSIS
     Example for err() and caller():
@@ -215,7 +215,7 @@ HOMEPAGE
 
 SOURCE
     Source repository is at
-    <https://github.com/perlancar/perl-Perinci-Sub-Util>.
+    <https://github.com/sharyanto/perl-Perinci-Sub-Util>.
 
 BUGS
     Please report any bugs or feature requests on the bugtracker website
