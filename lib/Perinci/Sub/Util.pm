@@ -1,7 +1,7 @@
 package Perinci::Sub::Util;
 
-our $DATE = '2014-10-15'; # DATE
-our $VERSION = '0.40'; # VERSION
+our $DATE = '2015-01-04'; # DATE
+our $VERSION = '0.41'; # VERSION
 
 use 5.010001;
 use strict;
@@ -18,6 +18,11 @@ our @EXPORT_OK = qw(
                );
 
 our %SPEC;
+
+$SPEC{':package'} = {
+    v => 1.1,
+    summary => 'Helper when writing functions',
+};
 
 our $STACK_TRACE;
 our @_c; # to store temporary celler() result
@@ -175,6 +180,15 @@ package name, will use caller's package. If no `output_code` is specified, the
 base subroutine reference will be assigned here.
 
 Note that this argument is optional.
+
+_
+        },
+        output_code => {
+            summary => 'Code for the modified sub',
+            schema  => 'code*',
+            description => <<'_',
+
+If not specified will use `base_code` (which will then be required).
 
 _
         },
@@ -361,7 +375,7 @@ Perinci::Sub::Util - Helper when writing functions
 
 =head1 VERSION
 
-This document describes version 0.40 of Perinci::Sub::Util (from Perl distribution Perinci-Sub-Util), released on 2014-10-15.
+This document describes version 0.41 of Perinci::Sub::Util (from Perl distribution Perinci-Sub-Util), released on 2015-01-04.
 
 =head1 SYNOPSIS
 
@@ -518,6 +532,12 @@ Specify code to modify metadata.
 Code will be called with arguments ($meta) where $meta is the cloned Rinci
 metadata.
 
+=item * B<output_code> => I<code>
+
+Code for the modified sub.
+
+If not specified will use C<base_code> (which will then be required).
+
 =item * B<output_name> => I<str>
 
 Where to install the modified sub.
@@ -546,8 +566,6 @@ Summary for the mod subroutine.
 
 =back
 
-Return value:
-
 Returns an enveloped result (an array).
 
 First element (status) is an integer containing HTTP status code
@@ -557,8 +575,7 @@ First element (status) is an integer containing HTTP status code
 element (meta) is called result metadata and is optional, a hash
 that contains extra information.
 
- (hash)
-
+Return value:  (hash)
 =head1 FAQ
 
 =head2 What if I want to put result ($res->[2]) into my result with err()?
@@ -568,12 +585,6 @@ You can do something like this:
  my $err = err(...) if ERROR_CONDITION;
  $err->[2] = SOME_RESULT;
  return $err;
-
-=head1 TODO
-
-L<Perinci::Sub::Wrapper> will generate wrapper that modifies caller() for the
-wrapped subroutine (like in L<Hook::LexWrap>), so this module's caller() will
-not be needed in the future.
 
 =head1 SEE ALSO
 
@@ -601,7 +612,7 @@ perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by perlancar@cpan.org.
+This software is copyright (c) 2015 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

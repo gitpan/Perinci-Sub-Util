@@ -1,7 +1,7 @@
 package Perinci::Sub::Util::Sort;
 
-our $DATE = '2014-10-15'; # DATE
-our $VERSION = '0.40'; # VERSION
+our $DATE = '2015-01-04'; # DATE
+our $VERSION = '0.41'; # VERSION
 
 use 5.010;
 use strict;
@@ -38,7 +38,7 @@ Perinci::Sub::Util::Sort - Sort routines
 
 =head1 VERSION
 
-This document describes version 0.40 of Perinci::Sub::Util::Sort (from Perl distribution Perinci-Sub-Util), released on 2014-10-15.
+This document describes version 0.41 of Perinci::Sub::Util::Sort (from Perl distribution Perinci-Sub-Util), released on 2015-01-04.
 
 =head1 SYNOPSIS
 
@@ -83,7 +83,7 @@ perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by perlancar@cpan.org.
+This software is copyright (c) 2015 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
